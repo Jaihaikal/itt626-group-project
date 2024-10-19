@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
 
         ]);
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             Product::create([
                 'name' => 'Example Product ' . ($i + 1),
                 'quantity' => rand(10, 100),

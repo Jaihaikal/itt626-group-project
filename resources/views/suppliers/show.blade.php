@@ -40,23 +40,26 @@
                                     <p class=" font-weight-semibold ">Supplier ID :{{ $supplier->id }}</p>
                             </div>
                             <div class="ms-auto d-flex ">
-                                <a href="{{ route('suppliers.edit', $supplier->id) }}"
-                                    class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
-                                <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="post"
-                                    class="d-inline delete-form">@csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger me-2">Delete</button>
-                                </form>
+                                @if (auth()->check() && auth()->user()->role === 'admin')
+                                    <a href="{{ route('suppliers.edit', $supplier->id) }}"
+                                        class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
+                                    <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="post"
+                                        class="d-inline delete-form">@csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger me-2">Delete</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0"> 
-                                    
+                                <table class="table align-items-center mb-0">
+
                                     <tr>
-                                        <th style="padding-left: 20px;" class="text-dark font-weight-semibold col-4 ">Name</th>
+                                        <th style="padding-left: 20px;" class="text-dark font-weight-semibold col-4 ">Name
+                                        </th>
                                         <td>{{ $supplier->name }}</td>
                                     </tr>
                                     <tr>
@@ -68,10 +71,11 @@
                                         <td>{{ $supplier->address }}</td>
                                     </tr>
                                     <tr class=" mb-6 ">
-                                        <th style="padding-left: 20px;" class="text-dark font-weight-semibold">Phone Number</th>
+                                        <th style="padding-left: 20px;" class="text-dark font-weight-semibold">Phone Number
+                                        </th>
                                         <td>{{ $supplier->phone_number }}</td>
                                     </tr>
-                                    
+
                                 </table>
                             </div>
                             {{-- custom --}}
@@ -95,7 +99,7 @@
             </div>
             <div class="card-body px-0 py-0">
                 <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    {{-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1" autocomplete="off"
                             checked>
                         <label class="btn btn-white px-3 mb-0" for="btnradiotable1">All</label>
@@ -114,7 +118,7 @@
                             </svg>
                         </span>
                         <input type="text" class="form-control" placeholder="Search">
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
@@ -166,12 +170,14 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center align-items-middle">
-                                            <a href="{{ route('products.edit', $p->id) }}"
-                                                class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
-                                            <form action="{{ route('products.destroy', $p->id) }}" method="post"
-                                                class="d-inline delete-form">@csrf @method('DELETE') <button
-                                                    type="submit" class="btn btn-sm btn-danger delete-button me-2"
-                                                    data-product-name="{{ $p->name }}">Delete</button> </form>
+                                            @if (auth()->check() && auth()->user()->role === 'admin')
+                                                <a href="{{ route('products.edit', $p->id) }}"
+                                                    class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
+                                                <form action="{{ route('products.destroy', $p->id) }}" method="post"
+                                                    class="d-inline delete-form">@csrf @method('DELETE') <button
+                                                        type="submit" class="btn btn-sm btn-danger delete-button me-2"
+                                                        data-product-name="{{ $p->name }}">Delete</button> </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 
-class LoginController extends Controller
+ class LoginController extends Controller
 {
 
     /**
@@ -27,18 +27,41 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+
+    //     $credentials = $request->only('email', 'password');
+
+    //     $rememberMe = $request->rememberMe ? true : false;
+
+    //     if (Auth::attempt($credentials, $rememberMe)) {
+    //         $request->session()->regenerate();
+
+    //         return redirect()->intended('/dashboard');
+    //     }
+    //     return back()->withErrors([
+    //         'message' => 'The provided credentials do not match our records.',
+    //     ])->withInput($request->only('email'));
+    // }
+
     public function store(Request $request)
     {
-
         $credentials = $request->only('email', 'password');
-
         $rememberMe = $request->rememberMe ? true : false;
 
         if (Auth::attempt($credentials, $rememberMe)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect()->intended('/dashboard');
+            } elseif ($user->role === 'user') {
+                return redirect()->intended('/stocks');
+            }
+
+            return redirect()->intended('/dashboard'); // Default redirection
         }
+
         return back()->withErrors([
             'message' => 'The provided credentials do not match our records.',
         ])->withInput($request->only('email'));
@@ -57,7 +80,6 @@ class LoginController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/sign-in');

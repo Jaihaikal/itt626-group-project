@@ -9,25 +9,17 @@
                     <p class="text-sm">See information about current inventory</p>
                 </div>
                 <div class="ms-auto d-flex">
-                    <button type="button" class="btn btn-sm btn-white me-2">
-                        View all
-                    </button>
-                    <a href="{{ route('products.create') }}" class="btn btn-dark btn-icon d-flex align-items-center">
-                        <span class="btn-inner--text">Add Product</span>
-                    </a>
+                    @if (auth()->check() && auth()->user()->role === 'admin')
+                        <a href="{{ route('products.create') }}" class="btn btn-dark btn-icon d-flex align-items-center">
+                            <span class="btn-inner--text">Add Product</span>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="card-body px-0 py-0">
-            <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
+            {{-- <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1" autocomplete="off"
-                        checked>
-                    <label class="btn btn-white px-3 mb-0" for="btnradiotable1">All</label>
-                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable2" autocomplete="off">
-                    <label class="btn btn-white px-3 mb-0" for="btnradiotable2">Monitored</label>
-                    <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable3" autocomplete="off">
-                    <label class="btn btn-white px-3 mb-0" for="btnradiotable3">Unmonitored</label>
                 </div>
                 <div class="input-group w-sm-25 ms-auto">
                     <span class="input-group-text text-body">
@@ -38,9 +30,9 @@
                             </path>
                         </svg>
                     </span>
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" id="search-input" placeholder="Search">
                 </div>
-            </div>
+            </div> --}}
             <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                     <thead class="bg-gray-100">
@@ -89,26 +81,31 @@
                                 </td>
                                 <td>
                                     <div class="d-flex justify-content-center align-items-middle">
-                                        <a href="{{ route('products.edit', $p->id) }}"
-                                            class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
-                                        <form action="{{ route('products.destroy', $p->id) }}" method="post"
-                                            class="d-inline delete-form">@csrf @method('DELETE') <button type="submit"
-                                                class="btn btn-sm btn-danger delete-button me-2" data-product-name="{{ $p->name }}">Delete</button> </form>
+                                        @if (auth()->check() && auth()->user()->role === 'admin')
+                                            <a href="{{ route('products.edit', $p->id) }}"
+                                                class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
+                                            <form action="{{ route('products.destroy', $p->id) }}" method="post"
+                                                class="d-inline delete-form">@csrf @method('DELETE') <button type="submit"
+                                                    class="btn btn-sm btn-danger delete-button me-2"
+                                                    data-product-name="{{ $p->name }}">Delete</button> </form>
+                                        @endif
                                     </div>
                                 </td>
+                                <td>
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="border-top py-3 px-3 d-flex align-items-center">
-            <p class="font-weight-semibold mb-0 text-dark text-sm">Page 1 of 10</p>
-            <div class="ms-auto">
-                <button class="btn btn-sm btn-white mb-0">Previous</button>
-                <button class="btn btn-sm btn-white mb-0">Next</button>
-            </div>
+            <p class="font-weight-semibold mb-0 text-dark text-sm"> {{ $products->links('products.pagination.custom') }}
+            </p>
+
         </div>
     </div>
     </div>
+
+    
 @endsection

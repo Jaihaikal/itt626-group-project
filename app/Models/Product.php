@@ -28,7 +28,10 @@ class Product extends Model
     // }
 
     // For aalytic tables and inventory records
-
+    public function getIdAttribute($value)
+{
+    return str_pad($value, 4, '0', STR_PAD_LEFT);
+}
     public static function boot()
     {
         parent::boot();
