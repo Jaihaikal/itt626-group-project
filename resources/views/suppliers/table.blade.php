@@ -7,17 +7,16 @@
                     <p class="text-sm">See information about current suppliers</p>
                 </div>
                 <div class="ms-auto d-flex">
-                    <button type="button" class="btn btn-sm btn-white me-2">
-                        View all
-                    </button>
-                    <a href="{{ route('suppliers.create') }}" class="btn btn-dark btn-icon d-flex align-items-center">
-                        <span class="btn-inner--text">Add Suppliers</span>
-                    </a>
+                    @if (auth()->check() && auth()->user()->role === 'admin')
+                        <a href="{{ route('suppliers.create') }}" class="btn btn-dark btn-icon d-flex align-items-center">
+                            <span class="btn-inner--text">Add Suppliers</span>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="card-body px-0 py-0">
-            <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
+            {{-- <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1" autocomplete="off"
                         checked>
@@ -38,7 +37,7 @@
                     </span>
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-            </div>
+            </div> --}}
             <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                     <thead class="bg-gray-100">
@@ -86,6 +85,8 @@
                                         class="text-secondary text-sm font-weight-normal">{{ $s->updated_at->format('d-m-Y') }}</span>
                                 </td>
                                 <td class="align-middle text-center">
+                                    @if (auth()->check() && auth()->user()->role === 'admin')
+
                                     <a href="{{ route('suppliers.edit', $s->id) }}"
                                         class="btn btn-sm btn-primary mr-2">Edit</a>
                                     <form action="{{ route('suppliers.destroy', $s->id) }}" method="post" class="d-inline">
@@ -93,6 +94,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

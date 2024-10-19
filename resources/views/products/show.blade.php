@@ -38,14 +38,16 @@
                                 <h4 class="font-weight-semibold ">Item Details</h6>
                                     <p class=" font-weight-semibold ">Supplier ID :{{ $product->supplier->id }}</p>
                             </div>
-                            <div class="ms-auto d-flex ">
-                                <a href="{{ route('suppliers.edit', $product->id) }}"
-                                    class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
-                                <form action="{{ route('products.destroy', $product->id) }}" method="post"
-                                    class="d-inline delete-form">@csrf @method('DELETE') <button type="submit"
-                                        class="btn btn-sm btn-danger delete-button me-2"
-                                        data-product-name="{{ $product->name }}">Delete</button> </form>
-                            </div>
+                            @if (auth()->check() && auth()->user()->role === 'admin')
+                                <div class="ms-auto d-flex ">
+                                    <a href="{{ route('suppliers.edit', $product->id) }}"
+                                        class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="post"
+                                        class="d-inline delete-form">@csrf @method('DELETE') <button type="submit"
+                                            class="btn btn-sm btn-danger delete-button me-2"
+                                            data-product-name="{{ $product->name }}">Delete</button> </form>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="row">
@@ -106,15 +108,17 @@
                                 <h4 class="font-weight-semibold ">Item Supplier Details</h6>
                                     <p class=" font-weight-semibold ">Supplier ID :{{ $product->supplier->id }}</p>
                             </div>
-                            <div class="ms-auto d-flex ">
-                                <a href="{{ route('suppliers.edit', $product->supplier->id) }}"
-                                    class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
-                                <form action="{{ route('suppliers.destroy', $product->supplier->id) }}" method="post"
-                                    class="d-inline delete-form">@csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger me-2">Delete</button>
-                                </form>
-                            </div>
+                            @if (auth()->check() && auth()->user()->role === 'admin')
+                                <div class="ms-auto d-flex ">
+                                    <a href="{{ route('suppliers.edit', $product->supplier->id) }}"
+                                        class="btn btn-sm btn-primary mr-2 me-2">Edit</a>
+                                    <form action="{{ route('suppliers.destroy', $product->supplier->id) }}" method="post"
+                                        class="d-inline delete-form">@csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger me-2">Delete</button>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="row">

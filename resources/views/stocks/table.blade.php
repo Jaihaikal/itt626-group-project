@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="card-body px-0 py-0">
-            <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
+            {{-- <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1" autocomplete="off"
                         checked>
@@ -36,7 +36,7 @@
                     </span>
                     <input type="text" id="search-input" class="form-control" placeholder="Search">
                 </div>
-            </div>
+            </div> --}}
             <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                     <thead class="bg-gray-100">

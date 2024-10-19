@@ -71,6 +71,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('assets/js/deleteConfirmation.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/expensesChart.js') }}"></script> <!-- Include your custom JS file --> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -100,8 +101,8 @@
         <div class="card shadow-lg ">
             <div class="card-header pb-0 pt-3 ">
                 <div class="float-start">
-                    <h5 class="mt-3 mb-0">Corporate UI Configurator</h5>
-                    <p>See our dashboard options.</p>
+                    <h5 class="mt-3 mb-0"> Configurator</h5>
+                    
                 </div>
                 <div class="float-end mt-4">
                     <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -133,7 +134,6 @@
                 <!-- Sidenav Type -->
                 <div class="mt-3">
                     <h6 class="mb-0">Sidenav Type</h6>
-                    <p class="text-sm">Choose between 2 different sidenav types.</p>
                 </div>
                 <div class="d-flex">
                     <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-slate-900"
@@ -141,7 +141,6 @@
                     <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
                         onclick="sidebarType(this)">White</button>
                 </div>
-                <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
                 <!-- Navbar Fixed -->
                 <div class="mt-3">
                     <h6 class="mb-0">Navbar Fixed</h6>
@@ -151,26 +150,9 @@
                         onclick="navbarFixed(this)">
                 </div>
                 <hr class="horizontal dark my-sm-4">
-                <a class="btn bg-gradient-dark w-100" target="_blank"
-                    href="https://www.creative-tim.com/product/corporate-ui-dashboard-laravel">Free Download</a>
-                <a class="btn btn-outline-dark w-100" target="_blank"
-                    href="https://www.creative-tim.com/learning-lab/bootstrap/installation-guide/corporate-ui-dashboard">View
-                    documentation</a>
-                <div class="w-100 text-center">
-                    <a class="github-button" target="_blank"
-                        href="https://github.com/creativetimofficial/corporate-ui-dashboard-laravel"
-                        data-icon="octicon-star" data-size="large" data-show-count="true"
-                        aria-label="Star creativetimofficial/corporate-ui-dashboard on GitHub">Star</a>
-                    <h6 class="mt-3">Thank you for sharing!</h6>
-                    <a href="https://twitter.com/intent/tweet?text=Check%20Corporate%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%26%20%40UPDIVISION%20%23webdesign%20%23dashboard%20%23bootstrap5%20%23laravel&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fcorporate-ui-dashboard-laravel"
-                        class="btn btn-dark mb-0 me-2" target="_blank">
-                        <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/corporate-ui-dashboard-laravel"
-                        class="btn btn-dark mb-0 me-2" target="_blank">
-                        <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-                    </a>
-                </div>
+                
+                
+                
             </div>
         </div>
     </div>
@@ -195,95 +177,7 @@
         };
 
 
-        var ctx = document.getElementById("chart-bars").getContext("2d");
-
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-                datasets: [{
-                        label: "Sales",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        borderSkipped: false,
-                        backgroundColor: "#2ca8ff",
-                        data: [450, 200, 100, 220, 500, 100, 400, 230, 500, 200],
-                        maxBarThickness: 6
-                    },
-                    {
-                        label: "Sales",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        borderSkipped: false,
-                        backgroundColor: "#7c3aed",
-                        data: [200, 300, 200, 420, 400, 200, 300, 430, 400, 300],
-                        maxBarThickness: 6
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    },
-                    tooltip: {
-                        backgroundColor: '#fff',
-                        titleColor: '#1e293b',
-                        bodyColor: '#1e293b',
-                        borderColor: '#e9ecef',
-                        borderWidth: 1,
-                        usePointStyle: true
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        stacked: true,
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [4, 4],
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            padding: 10,
-                            font: {
-                                size: 12,
-                                family: "Noto Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                            color: "#64748B"
-                        },
-                    },
-                    x: {
-                        stacked: true,
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false
-                        },
-                        ticks: {
-                            font: {
-                                size: 12,
-                                family: "Noto Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                            color: "#64748B"
-                        },
-                    },
-                },
-            },
-        });
+        
 
 
         var ctx2 = document.getElementById("chart-line").getContext("2d");
@@ -291,7 +185,8 @@
         var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 
         gradientStroke1.addColorStop(1, 'rgba(45,168,255,0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(45,168,255,0.0)');
+        gradientStroke1.addColorStop
+        (0.2, 'rgba(45,168,255,0.0)');
         gradientStroke1.addColorStop(0, 'rgba(45,168,255,0)'); //blue colors
 
         var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
